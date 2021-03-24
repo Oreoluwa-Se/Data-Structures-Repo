@@ -18,30 +18,79 @@ class TreeOrders:
 
   def inOrder(self):
     self.result = []
-    # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+
+    # checks for empty list
+    if len(self.key) == 0:
+      return self.result
+
+    # start at index root
+    self.inOderHelper(0)
+    # return result
     return self.result
+    
+  def inOderHelper(self, idx):
+    # traverse left side
+    if self.left[idx] != -1:
+      self.inOderHelper(self.left[idx])
+    # append to the list
+    self.result.append(self.key[idx])
+    # check right side
+    if self.right[idx] != -1:
+      self.inOderHelper(self.right[idx])
+
 
   def preOrder(self):
     self.result = []
     # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+
+    # checks for empty list
+    if len(self.key) == 0:
+      return self.result
+
+    # start at index root
+    self.preOderHelper(0)
+    # return result
     return self.result
+    
+  def preOderHelper(self, idx):
+    # append to the list
+    self.result.append(self.key[idx])
+    # traverse left side
+    if self.left[idx] != -1:
+      self.preOderHelper(self.left[idx])
+    # check right side
+    if self.right[idx] != -1:
+      self.preOderHelper(self.right[idx])
 
   def postOrder(self):
     self.result = []
-    # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+
+    # checks for empty list
+    if len(self.key) == 0:
+      return self.result
+      
+    # start at index root
+    self.postOderHelper(0)
+    # return result
     return self.result
+    
+  def postOderHelper(self, idx):
+    # traverse left side
+    if self.left[idx] != -1:
+      self.postOderHelper(self.left[idx])
+    # check right side
+    if self.right[idx] != -1:
+      self.postOderHelper(self.right[idx])
+    # append to the list
+    self.result.append(self.key[idx])
+
 
 def main():
-	tree = TreeOrders()
-	tree.read()
-	print(" ".join(str(x) for x in tree.inOrder()))
-	print(" ".join(str(x) for x in tree.preOrder()))
-	print(" ".join(str(x) for x in tree.postOrder()))
+  # read tree
+  tree = TreeOrders()
+  tree.read()
+  print(" ".join(str(x) for x in tree.inOrder()))
+  print(" ".join(str(x) for x in tree.preOrder()))
+  print(" ".join(str(x) for x in tree.postOrder()))
 
 threading.Thread(target=main).start()

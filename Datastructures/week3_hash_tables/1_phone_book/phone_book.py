@@ -42,6 +42,47 @@ def process_queries(queries):
             result.append(response)
     return result
 
+# using a dictionary for the phone book hashing problem
+class PhoneBook:
+    def __init__(self):
+        # dictionary initializer
+        self.pb = {}
+
+        # to track number of records
+        self.counter = 0
+
+    def add_number(self, number, name):
+        # phone book structure [key=number, value name]
+        self.pb[number] = name
+        self.counter += 1
+
+    def find(self, number):
+        # returns not found if not in list alaready
+        value = self.pb.get(number, "not found")
+        return value
+
+    def delete(self, number):
+        if number in self.pb.keys():
+            # decrement counter
+            self.counter -= 1
+
+            # delete
+            a = self.pb.pop(number)
+
+    def process_queries(self, queries):
+        result = []
+        for cur_query in queries:
+            if cur_query.type == 'add':
+                self.add_number(cur_query.number, cur_query.name)
+            elif cur_query.type == 'del':
+                self.delete(cur_query.number)
+            else:
+                response = self.find(cur_query.number)
+                result.append(response)
+        return result
+
 if __name__ == '__main__':
-    write_responses(process_queries(read_queries()))
+    # initialize phone bool
+    pb = PhoneBook()
+    write_responses(pb.process_queries(read_queries()))
 
